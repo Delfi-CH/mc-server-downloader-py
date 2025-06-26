@@ -52,10 +52,11 @@ jobs:
         pip install -r requirements.txt
 
     - name: Build and package Windows binary
-      run: pyinstaller --onefile main.py --name mcsvdl.exe
-            cd dist
-            del windows.zip
-            tar -cf windows.zip mcsvdl.exe
+      run: |
+        pyinstaller --onefile main.py --name mcsvdl.exe
+        cd dist
+        del windows.zip
+        tar -cf windows.zip mcsvdl.exe
       
 
     - name: Upload Windows binary
