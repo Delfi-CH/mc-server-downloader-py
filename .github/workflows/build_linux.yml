@@ -22,11 +22,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Build binary with pyinstaller
+    - name: Build Linux binary
       run: |
         pyinstaller --onefile main.py --name mcsvdl
 
-    - name: Upload binary
+    - name: Upload Linux binary
       uses: actions/upload-artifact@v4
       with:
         name: mcsvdl
