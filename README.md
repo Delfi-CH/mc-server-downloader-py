@@ -17,6 +17,8 @@ git clone https://github.com/Delfi-CH/mc-server-downloader-py.git
 
 cd mc-server-downloader-py
 
+pip install -r requirements.txt
+
 pyinstaller --onefile --hidden-import=requests main.py --name mcsvdl
 ```
 
