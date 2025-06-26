@@ -1,7 +1,7 @@
-name: Build Python Executable (LINUX)
+name: Build Python Executable
 
 on:
-  pull_request:
+  push:
     branches: [ stable ]
 
 jobs:
@@ -22,15 +22,18 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Build Linux binary
+    - name: Build and package Linux binary
       run: |
         pyinstaller --onefile main.py --name mcsvdl
+        cd dist
+        rm -rf linux.tar
+        tar -cf linux.tar mcsvdl
 
     - name: Upload Linux binary
       uses: actions/upload-artifact@v4
       with:
-        name: mcsvdl
-        path: dist/mcsvdl
+        name: linux.tar
+        path: dist/linux.tar
   build-win:
     runs-on: windows-latest
 
@@ -48,12 +51,45 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Build Windows binary
+    - name: Build and package Windows binary
       run: pyinstaller --onefile main.py --name mcsvdl.exe
+            cd dist
+            del windows.zip
+            tar -cf windows.zip mcsvdl.exe
+      
 
     - name: Upload Windows binary
       uses: actions/upload-artifact@v4
       with:
-        name: mcsvdl-windows
-        path: dist/mcsvdl.exe
+        name: windows.zip
+        path: dist/windows.zip
+  release:
+    needs: [build-linux, build-win]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/stable')
+
+    steps:
+    - name: Download Linux binary
+      uses: actions/download-artifact@v4
+      with:
+        name: linux.tar
+        path: ./dist
+
+    - name: Download Windows binary
+      uses: actions/download-artifact@v4
+      with:
+        name: windows.zip
+        path: ./dist
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: v1.0.${{ github.run_number }}
+        name: "Release v1.0.${{ github.run_number }}"
+        files: |
+          dist/windows.zip
+          dist/linux.tar
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
