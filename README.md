@@ -17,7 +17,9 @@ git clone https://github.com/Delfi-CH/mc-server-downloader-py.git
 
 cd mc-server-downloader-py
 
-pyinstaller --onefile --hidden-import=requests main.py --name mcsvdl
+pip install -r requirements.txt
+
+pyinstaller --onefile main.py --name mcsvdl
 ```
 
 You will find the binary in a "dist" Folder.
