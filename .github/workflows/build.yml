@@ -26,7 +26,6 @@ jobs:
       run: |
         pyinstaller --onefile main.py --name mcsvdl
         cd dist
-        rm -rf linux.tar
         tar -cf linux.tar mcsvdl
 
     - name: Upload Linux binary
@@ -55,7 +54,6 @@ jobs:
       run: |
         pyinstaller --onefile main.py --name mcsvdl.exe
         cd dist
-        del windows.zip
         tar -cf windows.zip mcsvdl.exe
       
 
