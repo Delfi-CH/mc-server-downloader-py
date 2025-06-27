@@ -27,7 +27,7 @@ jobs:
 
     - name: Build and package Linux binary
       run: |
-        pyinstaller --onefile main.py --name mcsvdl
+       pyinstaller --clean --onefile main.py --name mcsvdl
         cd dist
         tar -cf linux.tar mcsvdl
 
@@ -55,7 +55,7 @@ jobs:
 
     - name: Build and package Windows binary
       run: |
-        pyinstaller --onefile main.py --name mcsvdl.exe
+        pyinstaller --clean --onefile main.py --name mcsvdl.exe
         cd dist
         tar -cf windows.zip mcsvdl.exe
       
