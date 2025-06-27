@@ -27,7 +27,11 @@ You will find the binary in a "dist" Folder.
 ## Usage
 
 ```
-mcsvdl -v [Minecraft Server version number, eg. 1.21.6]
+mcsvdl 
+-v [Minecraft Server version number, eg. 1.21.6] 
+-m [Modloader, accepts: vanilla, fabric, forge, neoforge, papermc] 
+-fv [Forge Version, only needed when "-m forge" is used] 
+-nfv [NeoForge Version, only needed when "-m neoforge" is used]
 ```
 
 ## Legal

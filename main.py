@@ -66,6 +66,23 @@ def download_forge_server(minecraft_version: str, forge_version: str):
     print(f"Downloaded Forge installer to {installer_filename}.")
     print(f"To install, run: java -jar {installer_filename} --installServer")
 
+def download_neoforge_server(neoforge_version: str):
+
+    installer_filename = f"neoforge-{neoforge_version}-installer.jar"
+    installer_url = f"https://maven.neoforged.net/releases/net/neoforged/neoforge/{neoforge_version}/neoforge-{neoforge_version}-installer.jar"
+
+    print(f"Downloading NeoForge installer for -{neoforge_version} from {installer_url}...")
+    r = requests.get(installer_url)
+    if r.status_code != 200:
+        print(f"Failed to download Forge installer for {neoforge_version}.")
+        sys.exit(1)
+
+    with open(installer_filename, "wb") as f:
+        f.write(r.content)
+
+    print(f"Downloaded NeoForge installer to {installer_filename}.")
+    print(f"To install, run: java -jar {installer_filename} --installServer")
+
 def download_paper_server(version: str):
     output_file = "paper-server.jar"
     print(f"Fetching PaperMC builds for Minecraft {version}...")
@@ -91,8 +108,9 @@ def download_paper_server(version: str):
 def main():
     parser = argparse.ArgumentParser(description="Download a Minecraft server of a specific type and version.")
     parser.add_argument("--version", "-v", required=True, help="Minecraft version to download")
-    parser.add_argument("--type", "-m", dest="server_type", choices=["vanilla", "fabric", "forge", "paper"], default="vanilla", help="Server type to download")
-    parser.add_argument("--forge-version", help="Specific Forge version to download")
+    parser.add_argument("--type", "-m", dest="server_type", choices=["vanilla", "fabric", "forge", "neoforge", "paper"], default="vanilla", help="Server type to download")
+    parser.add_argument("--forge-version","-fv", help="Specific Forge version to download")
+    parser.add_argument("--neoforge-version", "-nfv", help="Specific Forge version to download")
 
     args = parser.parse_args()
 
@@ -104,6 +122,8 @@ def main():
         download_fabric_server(args.version)
     elif args.server_type == "forge":
         download_forge_server(args.version, args.forge_version)
+    elif args.server_type == "neoforge":
+        download_neoforge_server(args.neoforge_version)
     elif args.server_type == "paper":
         download_paper_server(args.version)
 
