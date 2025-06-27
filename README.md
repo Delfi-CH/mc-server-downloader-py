@@ -19,7 +19,7 @@ cd mc-server-downloader-py
 
 pip install -r requirements.txt
 
-pyinstaller --onefile main.py --name mcsvdl
+pyinstaller --clean --onefile main.py --name mcsvdl
 ```
 
 You will find the binary in a "dist" Folder.
