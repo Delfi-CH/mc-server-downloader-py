@@ -24,7 +24,7 @@ def download_minecraft_server(version: str):
 
 def download_fabric_server(version: str):
     installer_url = "https://maven.fabricmc.net/net/fabricmc/fabric-installer/1.0.0/fabric-installer-1.0.0.jar"
-    output_file = "fabric-installer.jar"
+    output_file = "installer.jar"
 
     print(f"Downloading Fabric installer for Minecraft {version}...")
     r = requests.get(installer_url)
@@ -42,16 +42,16 @@ def download_fabric_server(version: str):
 def download_forge_server(minecraft_version: str, forge_version: str):
     
     if minecraft_version == "1.9.4":
-        installer_filename = f"forge-{minecraft_version}-{forge_version}-{minecraft_version}-installer.jar"
+        installer_filename = f"installer.jar"
         installer_url = f"https://maven.minecraftforge.net/net/minecraftforge/forge/{minecraft_version}-{forge_version}-{minecraft_version}/forge-{minecraft_version}-{forge_version}-{minecraft_version}-installer.jar"
     elif minecraft_version == "1.8.9":
-        installer_filename = f"forge-{minecraft_version}-{forge_version}-{minecraft_version}-installer.jar"
+        installer_filename = f"installer.jar"
         installer_url = f"https://maven.minecraftforge.net/net/minecraftforge/forge/{minecraft_version}-{forge_version}-{minecraft_version}/forge-{minecraft_version}-{forge_version}-{minecraft_version}-installer.jar"
     elif minecraft_version == "1.7.10":
-        installer_filename = f"forge-{minecraft_version}-{forge_version}-{minecraft_version}-installer.jar"
+        installer_filename = f"installer.jar"
         installer_url = f"https://maven.minecraftforge.net/net/minecraftforge/forge/{minecraft_version}-{forge_version}-{minecraft_version}/forge-{minecraft_version}-{forge_version}-{minecraft_version}-installer.jar"
     else: 
-        installer_filename = f"forge-{minecraft_version}-{forge_version}-installer.jar"
+        installer_filename = f"installer.jar"
         installer_url = f"https://maven.minecraftforge.net/net/minecraftforge/forge/{minecraft_version}-{forge_version}-{minecraft_version}/forge-{minecraft_version}-{forge_version}-installer.jar"
 
     print(f"Downloading Forge installer for {minecraft_version}-{forge_version} from {installer_url}...")
@@ -68,7 +68,7 @@ def download_forge_server(minecraft_version: str, forge_version: str):
 
 def download_neoforge_server(neoforge_version: str):
 
-    installer_filename = f"neoforge-{neoforge_version}-installer.jar"
+    installer_filename = f"installer.jar"
     installer_url = f"https://maven.neoforged.net/releases/net/neoforged/neoforge/{neoforge_version}/neoforge-{neoforge_version}-installer.jar"
 
     print(f"Downloading NeoForge installer for -{neoforge_version} from {installer_url}...")
@@ -84,7 +84,7 @@ def download_neoforge_server(neoforge_version: str):
     print(f"To install, run: java -jar {installer_filename} --installServer")
 
 def download_paper_server(version: str):
-    output_file = "paper-server.jar"
+    output_file = "server.jar"
     print(f"Fetching PaperMC builds for Minecraft {version}...")
     versions_url = "https://api.papermc.io/v2/projects/paper"
     versions_data = requests.get(versions_url).json()
