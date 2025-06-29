@@ -3,15 +3,6 @@ small python script that downloads a specific minecraft server.jar from mojang
 
 ## Building
 
-Install pyinstall
-
-```
-pip install pyinstall
-```
-
-Building the Project
-
-
 ```
 git clone https://github.com/Delfi-CH/mc-server-downloader-py.git
 
