@@ -57,7 +57,7 @@ jobs:
       run: |
         pyinstaller --clean --onefile main.py --name mcsvdl.exe
         cd dist
-        tar -cf windows.zip mcsvdl.exe
+        tar -acf windows.zip mcsvdl.exe
       
 
     - name: Upload Windows binary
