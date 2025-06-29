@@ -52,7 +52,7 @@ def download_forge_server(minecraft_version: str, forge_version: str):
         installer_url = f"https://maven.minecraftforge.net/net/minecraftforge/forge/{minecraft_version}-{forge_version}-{minecraft_version}/forge-{minecraft_version}-{forge_version}-{minecraft_version}-installer.jar"
     else: 
         installer_filename = f"installer.jar"
-        installer_url = f"https://maven.minecraftforge.net/net/minecraftforge/forge/{minecraft_version}-{forge_version}-{minecraft_version}/forge-{minecraft_version}-{forge_version}-installer.jar"
+        installer_url = f"https://maven.minecraftforge.net/net/minecraftforge/forge/{minecraft_version}-{forge_version}/forge-{minecraft_version}-{forge_version}-installer.jar"
 
     print(f"Downloading Forge installer for {minecraft_version}-{forge_version} from {installer_url}...")
     r = requests.get(installer_url)
