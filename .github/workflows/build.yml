@@ -29,7 +29,7 @@ jobs:
       run: |
        pyinstaller --clean --onefile main.py --name mcsvdl
         cd dist
-        tar -cf linux.tar mcsvdl
+        tar -acf linux.tar mcsvdl
 
     - name: Upload Linux binary
       uses: actions/upload-artifact@v4
