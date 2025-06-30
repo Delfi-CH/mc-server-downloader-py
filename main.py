@@ -105,6 +105,45 @@ def download_paper_server(version: str):
         f.write(r.content)
     print(f"Downloaded PaperMC server to {output_file}.")
 
+def download_folia_server(version: str):
+    output_file = "server.jar"
+    base = "https://api.papermc.io/v2/projects/folia"
+
+    print(f"Fetching Folia versions for Minecraft {version}...")
+    versions_data = requests.get(base).json()
+    if version not in versions_data["version_groups"]:
+        print(f"Folia does not support Minecraft version {version}.")
+        sys.exit(1)
+
+    builds_url = f"{base}/version_group/{version}/builds"
+    builds_data = requests.get(builds_url).json()
+    builds = builds_data.get("builds", [])
+    if not builds:
+        print(f"No builds found for Folia {version}.")
+        sys.exit(1)
+
+    latest_build = builds[-1]["build"]
+
+    build_info_url = f"{base}/versions/{version}/builds/{latest_build}"
+    build_info = requests.get(build_info_url).json()
+    downloads = build_info.get("downloads", {})
+    server_name = downloads.get("application", {}).get("name")
+    if not server_name:
+        print("Download name not found in build metadata.")
+        sys.exit(1)
+
+    download_url = f"{base}/versions/{version}/builds/{latest_build}/downloads/{server_name}"
+    print(f"Downloading Folia server (Minecraft {version}, build {latest_build})...")
+    r = requests.get(download_url)
+    if r.status_code != 200:
+        print("Failed to download Folia server jar.")
+        sys.exit(1)
+
+    with open(output_file, "wb") as f:
+        f.write(r.content)
+    print(f"Downloaded Folia server to {output_file}.")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Download a Minecraft server of a specific type and version.")
     parser.add_argument("--version", "-v", required=True, help="Minecraft version to download")
@@ -126,6 +165,8 @@ def main():
         download_neoforge_server(args.neoforge_version)
     elif args.server_type == "paper":
         download_paper_server(args.version)
+    elif args.server_type == "folia":
+        download_folia_server(args.version)
 
 if __name__ == "__main__":
     main()
