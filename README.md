@@ -1,6 +1,8 @@
 # mc-server-downloader-py
 small python script that downloads a specific minecraft server.jar from mojang or a modloader
 
+This app belongs to [delfi-ch/mc-server-panel](https://github.com/Delfi-CH/mc-server-panel). For a general overview of the project, please look there.
+
 ## Building
 
 ```

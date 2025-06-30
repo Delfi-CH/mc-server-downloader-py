@@ -28,8 +28,9 @@ jobs:
     - name: Build and package Linux binary
       run: |
        pyinstaller --clean --onefile main.py --name mcsvdl
+        cp LICENSE ./dist/LICENSE
         cd dist
-        tar -acf linux.tar mcsvdl
+        tar -acf linux.tar mcsvdl LICENSE
 
     - name: Upload Linux binary
       uses: actions/upload-artifact@v4
@@ -56,8 +57,9 @@ jobs:
     - name: Build and package Windows binary
       run: |
         pyinstaller --clean --onefile main.py --name mcsvdl.exe
+        copy LICENSE .\dist\LICENSE
         cd dist
-        tar -acf windows.zip mcsvdl.exe
+        tar -acf windows.zip mcsvdl.exe LICENSE
       
 
     - name: Upload Windows binary
