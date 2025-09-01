@@ -46,7 +46,7 @@ jobs:
 
     - name: Build and package Windows binary
       run: |
-        build.bat
+        cmd /c build.bat
         copy LICENSE .\dist\LICENSE
         cd dist
         tar -acf windows.zip mcsvdl.exe LICENSE
