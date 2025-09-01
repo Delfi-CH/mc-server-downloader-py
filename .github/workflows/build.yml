@@ -20,9 +20,14 @@ jobs:
       with:
         python-version: '3.x'
 
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
     - name: Build and package Linux binary
       run: |
-       sh build.sh
+       pyinstaller --clean --onefile main.py --name mcsvdl
         cp LICENSE ./dist/LICENSE
         cd dist
         tar -acf linux.tar mcsvdl LICENSE
@@ -44,9 +49,14 @@ jobs:
       with:
         python-version: '3.x'
 
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
     - name: Build and package Windows binary
       run: |
-        build.bat
+        pyinstaller --clean --onefile main.py --name mcsvdl.exe
         copy LICENSE .\dist\LICENSE
         cd dist
         tar -acf windows.zip mcsvdl.exe LICENSE
