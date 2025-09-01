@@ -20,14 +20,9 @@ jobs:
       with:
         python-version: '3.x'
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-
     - name: Build and package Linux binary
       run: |
-       pyinstaller --clean --onefile main.py --name mcsvdl
+       bash build.sh
         cp LICENSE ./dist/LICENSE
         cd dist
         tar -acf linux.tar mcsvdl LICENSE
@@ -47,16 +42,11 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.x'
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        python-version: '3.x'     
 
     - name: Build and package Windows binary
       run: |
-        pyinstaller --clean --onefile main.py --name mcsvdl.exe
+        build.bat
         copy LICENSE .\dist\LICENSE
         cd dist
         tar -acf windows.zip mcsvdl.exe LICENSE
