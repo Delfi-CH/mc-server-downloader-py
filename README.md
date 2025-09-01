@@ -5,14 +5,24 @@ This app belongs to [delfi-ch/mc-server-panel](https://github.com/Delfi-CH/mc-se
 
 ## Building
 
-```
+Linux
+
+```bash
 git clone https://github.com/Delfi-CH/mc-server-downloader-py.git
 
 cd mc-server-downloader-py
 
-pip install -r requirements.txt
+build.sh
+```
 
-pyinstaller --clean --onefile main.py --name mcsvdl
+Windows
+
+```bash
+git clone https://github.com/Delfi-CH/mc-server-downloader-py.git
+
+cd mc-server-downloader-py
+
+build.bat
 ```
 
 You will find the binary in a "dist" Folder.
